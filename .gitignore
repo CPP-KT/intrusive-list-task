@@ -3,15 +3,12 @@
 .idea
 *.cbp
 
-# Google tests
-googletest-build/
-googletest-download/
-googletest-src/
-lib/
-
 # Cmake
 CMakeCache.txt
 CMakeFiles/
 cmake-build*
 cmake_install.cmake
 Makefile
+
+# OS
+.DS_Store
