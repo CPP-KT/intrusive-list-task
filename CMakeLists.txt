@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 find_package(GTest REQUIRED)
 
 file(GLOB TEST_SRC test/*.cpp)
-add_executable(tests src/intrusive_list.cpp ${TEST_SRC})
+add_executable(tests src/intrusive-list.cpp ${TEST_SRC})
 
 target_include_directories(tests PRIVATE src test)
 

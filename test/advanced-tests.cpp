@@ -1,5 +1,5 @@
-#include "intrusive_list.h"
-#include "test_utils.h"
+#include "intrusive-list.h"
+#include "test-utils.h"
 
 TEST(advanced_intrusive_list_testing, iterators_01) {
   intrusive::list<node> list;
