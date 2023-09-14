@@ -173,7 +173,7 @@ TEST(intrusive_list_testing, iterators_01) {
   EXPECT_TRUE(list.begin() == list.end());
   EXPECT_FALSE(list.begin() != list.end());
 
-  intrusive::list<node> const& clist = list;
+  const intrusive::list<node>& clist = list;
   EXPECT_TRUE(clist.begin() == clist.end());
   EXPECT_FALSE(clist.begin() != clist.end());
 }
@@ -193,7 +193,7 @@ TEST(intrusive_list_testing, iterators_03) {
   auto it1 = list.begin();
   node& ra1 = *it1;
   EXPECT_EQ(&a, &ra1);
-  auto const it2 = it1;
+  const auto it2 = it1;
   node& ra2 = *it2;
   EXPECT_EQ(&a, &ra2);
 }

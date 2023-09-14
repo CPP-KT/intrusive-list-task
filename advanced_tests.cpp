@@ -334,7 +334,8 @@ TEST(advanced_intrusive_list_testing, erase_02) {
 void magic(node& n) {
   n.value = 42;
 }
-void magic(node const&) {}
+
+void magic(const node&) {}
 
 TEST(advanced_intrusive_list_testing, back_front_ncref) {
   intrusive::list<node> list;
@@ -404,12 +405,12 @@ TEST(advanced_intrusive_list_testing, iterator_deref_1c) {
   intrusive::list<node> list;
   node a(1), b(2), c(3);
   mass_push_back(list, a, b, c);
-  intrusive::list<node>::iterator const i = std::next(list.begin());
+  const intrusive::list<node>::iterator i = std::next(list.begin());
   EXPECT_EQ(2, i->value);
   magic(*i);
   expect_eq(list, {1, 42, 3});
 
-  intrusive::list<node>::const_iterator const j = std::next(list.begin(), 2);
+  const intrusive::list<node>::const_iterator j = std::next(list.begin(), 2);
   EXPECT_EQ(3, j->value);
   magic(*j);
   expect_eq(list, {1, 42, 3});
@@ -434,12 +435,12 @@ TEST(advanced_intrusive_list_testing, iterator_deref_2c) {
   intrusive::list<node> list;
   node a(1), b(2), c(3);
   mass_push_back(list, a, b, c);
-  intrusive::list<node>::iterator const i = std::next(list.begin());
+  const intrusive::list<node>::iterator i = std::next(list.begin());
   EXPECT_EQ(2, i->value);
   magic(*i.operator->());
   expect_eq(list, {1, 42, 3});
 
-  intrusive::list<node>::const_iterator const j = std::next(list.begin(), 2);
+  const intrusive::list<node>::const_iterator j = std::next(list.begin(), 2);
   EXPECT_EQ(3, j->value);
   magic(*j.operator->());
   expect_eq(list, {1, 42, 3});
@@ -529,8 +530,7 @@ TEST(advanced_intrusive_list_testing, splice_middle_middle) {
   node e(5), f(6), g(7), h(8);
   mass_push_back(c1, a, b, c, d);
   mass_push_back(c2, e, f, g, h);
-  c1.splice(std::next(c1.begin(), 2), c2, std::next(c2.begin()),
-            std::next(c2.begin(), 3));
+  c1.splice(std::next(c1.begin(), 2), c2, std::next(c2.begin()), std::next(c2.begin(), 3));
   expect_eq(c1, {1, 2, 6, 7, 3, 4});
   expect_eq(c2, {5, 8});
 }
@@ -563,8 +563,7 @@ TEST(advanced_intrusive_list_testing, splice_middle_empty) {
   node e(5), f(6), g(7), h(8);
   mass_push_back(c1, a, b, c, d);
   mass_push_back(c2, e, f, g, h);
-  c1.splice(std::next(c1.begin(), 2), c2, std::next(c2.begin(), 2),
-            std::next(c2.begin(), 2));
+  c1.splice(std::next(c1.begin(), 2), c2, std::next(c2.begin(), 2), std::next(c2.begin(), 2));
   expect_eq(c1, {1, 2, 3, 4});
   expect_eq(c2, {5, 6, 7, 8});
 }
@@ -664,8 +663,7 @@ TEST(advanced_intrusive_list_testing, splice_self) {
   intrusive::list<node> c1;
   node a(1), b(2), c(3), d(4), e(5);
   mass_push_back(c1, a, b, c, d, e);
-  c1.splice(std::next(c1.begin()), c1, std::next(c1.begin(), 2),
-            std::prev(c1.end()));
+  c1.splice(std::next(c1.begin()), c1, std::next(c1.begin(), 2), std::prev(c1.end()));
   expect_eq(c1, {1, 3, 4, 2, 5});
 }
 
