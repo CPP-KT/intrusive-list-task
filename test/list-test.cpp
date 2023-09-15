@@ -6,6 +6,8 @@
 
 TEST(list_test, default_ctor) {
   intrusive::list<node> list;
+  EXPECT_TRUE(list.empty());
+  EXPECT_EQ(0, list.size());
 }
 
 TEST(list_test, push_back_lifetime_1) {
@@ -138,18 +140,22 @@ TEST(list_test, pop) {
 
   EXPECT_EQ(1, list.front());
   EXPECT_EQ(4, list.back());
+  EXPECT_EQ(4, list.size());
 
   list.pop_front();
   EXPECT_EQ(2, list.front());
   EXPECT_EQ(4, list.back());
+  EXPECT_EQ(3, list.size());
 
   list.pop_back();
   EXPECT_EQ(2, list.front());
   EXPECT_EQ(3, list.back());
+  EXPECT_EQ(2, list.size());
 
   list.pop_front();
   EXPECT_EQ(3, list.front());
   EXPECT_EQ(3, list.back());
+  EXPECT_EQ(1, list.size());
 }
 
 TEST(list_test, move_ctor) {

@@ -39,6 +39,7 @@ void expect_eq_impl(E expected_first, E expected_last, A actual_first, A actual_
 
 template <typename C>
 void expect_eq(C& cont, std::initializer_list<int> values) {
+  EXPECT_EQ(values.size(), cont.size());
   expect_eq_impl(values.begin(), values.end(), cont.begin(), cont.end());
   expect_eq_impl(std::make_reverse_iterator(values.end()), std::make_reverse_iterator(values.begin()),
                  std::make_reverse_iterator(cont.end()), std::make_reverse_iterator(cont.begin()));
