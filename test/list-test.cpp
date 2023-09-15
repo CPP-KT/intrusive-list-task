@@ -50,21 +50,6 @@ TEST(list_test, push_front_many) {
   expect_eq(list, {5, 4, 3, 2, 1});
 }
 
-TEST(list_test, multiple_tags) {
-  intrusive::list<multi_node, tag_a> list_a;
-  intrusive::list<multi_node, tag_b> list_b;
-  multi_node x(1), y(2), z(3);
-
-  mass_push_back(list_a, x, y, z);
-  mass_push_back(list_b, z, y, x);
-
-  EXPECT_EQ(1, list_a.front());
-  EXPECT_EQ(3, list_b.front());
-
-  expect_eq(list_a, {1, 2, 3});
-  expect_eq(list_b, {3, 2, 1});
-}
-
 TEST(list_test, back_front) {
   intrusive::list<node> list;
   node a(1), b(2), c(3);
@@ -105,6 +90,32 @@ TEST(list_test, back_front_ncref) {
   magic(std::as_const(list).back());
 
   expect_eq(list, {1, 2, 3});
+}
+
+TEST(list_test, multiple_tags) {
+  intrusive::list<multi_node, tag_a> list_a;
+  intrusive::list<multi_node, tag_b> list_b;
+  multi_node x(1), y(2), z(3);
+
+  mass_push_back(list_a, x, y, z);
+  mass_push_back(list_b, z, y, x);
+
+  expect_eq(list_a, {1, 2, 3});
+  expect_eq(list_b, {3, 2, 1});
+}
+
+TEST(list_test, multiple_tags_back_front) {
+  intrusive::list<multi_node, tag_a> list_a;
+  intrusive::list<multi_node, tag_b> list_b;
+  multi_node x(1), y(2), z(3);
+
+  mass_push_back(list_a, x, y, z);
+  mass_push_back(list_b, z, y, x);
+
+  EXPECT_EQ(1, list_a.front());
+  EXPECT_EQ(3, list_a.back());
+  EXPECT_EQ(1, std::as_const(list_a).front());
+  EXPECT_EQ(3, std::as_const(list_a).back());
 }
 
 TEST(list_test, pop_back) {
