@@ -186,6 +186,16 @@ TEST(list_test, move_assignment) {
   EXPECT_TRUE(list2.empty());
 }
 
+TEST(list_test, move_assignment_self) {
+  intrusive::list<node> list;
+  node a(1), b(2), c(3);
+  mass_push_back(list, a, b, c);
+
+  list = std::move(list);
+
+  expect_eq(list, {1, 2, 3});
+}
+
 TEST(list_test, move_assignment_empty) {
   intrusive::list<node> list1, list2;
 
@@ -219,6 +229,24 @@ TEST(list_test, move_assignment_from_empty) {
 
   EXPECT_TRUE(list1.empty());
   EXPECT_TRUE(list2.empty());
+}
+
+TEST(list_test, swap) {
+  intrusive::list<node> list1;
+  node a(1), b(2), c(3);
+  mass_push_back(list1, a, b, c);
+
+  intrusive::list<node> list2;
+  node d(4), e(5), f(6);
+  mass_push_back(list2, d, e, f);
+
+  {
+    using std::swap;
+    swap(list1, list2);
+  }
+
+  expect_eq(list1, {4, 5, 6});
+  expect_eq(list2, {1, 2, 3});
 }
 
 TEST(list_test, insert_front) {
