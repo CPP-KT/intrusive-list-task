@@ -1,6 +1,10 @@
 #pragma once
 
+#include "intrusive-list.h"
+
 #include <gtest/gtest.h>
+
+#include <ranges>
 
 template <typename C>
 void mass_push_back(C&) {}
@@ -37,12 +41,16 @@ void expect_eq_impl(E expected_first, E expected_last, A actual_first, A actual_
   }
 }
 
-template <typename C>
-void expect_eq(C& cont, std::initializer_list<int> values) {
-  EXPECT_EQ(values.size(), cont.size());
-  expect_eq_impl(values.begin(), values.end(), cont.begin(), cont.end());
-  expect_eq_impl(std::make_reverse_iterator(values.end()), std::make_reverse_iterator(values.begin()),
-                 std::make_reverse_iterator(cont.end()), std::make_reverse_iterator(cont.begin()));
+template <typename E, typename A>
+void expect_eq_impl(const E& expected, const A& actual) {
+  expect_eq_impl(expected.begin(), expected.end(), actual.begin(), actual.end());
+}
+
+template <typename T, typename Tag>
+void expect_eq(const intrusive::list<T, Tag>& list, std::initializer_list<int> values) {
+  EXPECT_EQ(values.size(), list.size());
+  expect_eq_impl(values, list);
+  expect_eq_impl(std::views::reverse(list), std::views::reverse(values));
 }
 
 struct copyable_node : intrusive::list_element<> {
