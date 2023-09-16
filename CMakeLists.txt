@@ -21,6 +21,7 @@ else()
   if(TREAT_WARNINGS_AS_ERRORS)
     target_compile_options(tests PRIVATE -Werror -pedantic-errors)
   endif()
+  target_compile_options(tests PRIVATE -Wno-self-move)
 endif()
 
 # Compiler specific warnings
@@ -28,7 +29,8 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   target_compile_options(tests PRIVATE -Wshadow=compatible-local)
   target_compile_options(tests PRIVATE -Wduplicated-branches)
   target_compile_options(tests PRIVATE -Wduplicated-cond)
-  target_compile_options(tests PRIVATE -Wnull-dereference)
+  # Disabled due to GCC bug
+  # target_compile_options(tests PRIVATE -Wnull-dereference)
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   target_compile_options(tests PRIVATE -Wshadow-uncaptured-local)
   target_compile_options(tests PRIVATE -Wloop-analysis)
