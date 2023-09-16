@@ -50,6 +50,16 @@ TEST(list_test, push_front_many) {
   expect_eq(list, {5, 4, 3, 2, 1});
 }
 
+TEST(list_test, clear) {
+  intrusive::list<node> list;
+  node a(1), b(2), c(3), d(4);
+  mass_push_back(list, a, b, c, d);
+
+  list.clear();
+  EXPECT_TRUE(list.empty());
+  EXPECT_EQ(0, list.size());
+}
+
 TEST(list_test, back_front) {
   intrusive::list<node> list;
   node a(1), b(2), c(3);
