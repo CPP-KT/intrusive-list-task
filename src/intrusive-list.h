@@ -21,7 +21,7 @@ public:
   // O(1)
   list() noexcept;
 
-  // O(n)
+  // O(1)
   ~list();
 
   list(const list&) = delete;
@@ -30,7 +30,7 @@ public:
   // O(1)
   list(list&& other) noexcept;
 
-  // O(n)
+  // O(1)
   list& operator=(list&& other) noexcept;
 
   // O(1)
@@ -63,7 +63,7 @@ public:
   // O(1)
   void pop_back() noexcept;
 
-  // O(n)
+  // O(1)
   void clear() noexcept;
 
   // O(1)
