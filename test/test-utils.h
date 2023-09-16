@@ -75,6 +75,10 @@ struct node : intrusive::list_element<> {
     return value;
   }
 
+  void unlink(int) {
+    // do nothing
+  }
+
   int value;
 };
 
