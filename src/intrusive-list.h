@@ -1,7 +1,7 @@
 #pragma once
 
-#include <concepts>
 #include <cstddef>
+#include <type_traits>
 
 namespace intrusive {
 
@@ -11,8 +11,9 @@ template <typename Tag = default_tag>
 class list_element {};
 
 template <typename T, typename Tag = default_tag>
-  requires std::derived_from<T, list_element<Tag>>
 class list {
+  static_assert(std::is_base_of_v<list_element<Tag>, T>, "T must derive from list_element");
+
 public:
   using iterator = void;
   using const_iterator = void;
