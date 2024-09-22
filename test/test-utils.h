@@ -54,7 +54,8 @@ void expect_eq(const intrusive::list<T, Tag>& list, std::initializer_list<int> v
 }
 
 struct copyable_node : intrusive::list_element<> {
-  explicit copyable_node(int value) : value(value) {}
+  explicit copyable_node(int value)
+      : value(value) {}
 
   operator int() const {
     return value;
@@ -64,7 +65,8 @@ struct copyable_node : intrusive::list_element<> {
 };
 
 struct node : intrusive::list_element<> {
-  explicit node(int value) : value(value) {}
+  explicit node(int value)
+      : value(value) {}
 
   node(const node& other) = delete;
   node(node&& other) = delete;
@@ -82,8 +84,11 @@ struct node : intrusive::list_element<> {
   int value;
 };
 
-struct multi_node : intrusive::list_element<struct tag_a>, intrusive::list_element<struct tag_b> {
-  explicit multi_node(int value) : value(value) {}
+struct multi_node
+    : intrusive::list_element<struct tag_a>
+    , intrusive::list_element<struct tag_b> {
+  explicit multi_node(int value)
+      : value(value) {}
 
   multi_node(const multi_node& other) = delete;
   multi_node(multi_node&& other) = delete;

@@ -1,8 +1,9 @@
 #!/bin/bash
 set -euo pipefail
-IFS=$' \t\n'
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BUILD_TYPE=$1
+
+SCRIPT_DIR="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 
 valgrind --tool=memcheck \
   --gen-suppressions=all \
@@ -11,6 +12,7 @@ valgrind --tool=memcheck \
   --leak-resolution=med \
   --track-origins=yes \
   --vgdb=no \
+  --show-mismatched-frees=no \
   --error-exitcode=1 \
   --suppressions="${SCRIPT_DIR}/valgrind.suppressions" \
-  cmake-build-RelWithDebInfo/tests
+  cmake-build-"$BUILD_TYPE"/tests

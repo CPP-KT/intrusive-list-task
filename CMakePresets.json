@@ -8,40 +8,54 @@
   "configurePresets": [
     {
       "name": "Release",
-      "displayName": "Release",
       "description": "Default Release build",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
       },
-      "binaryDir": "cmake-build-Release"
+      "binaryDir": "cmake-build-${presetName}"
     },
     {
       "name": "Debug",
-      "displayName": "debug",
       "description": "Debug build without sanitizers",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug"
       },
-      "binaryDir": "cmake-build-Debug"
-    },
-    {
-      "name": "SanitizedDebug",
-      "displayName": "SanitizedDebug",
-      "description": "Debug build with undefined, address and leak sanitizers enabled",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "USE_SANITIZERS": "ON"
-      },
-      "binaryDir": "cmake-build-SanitizedDebug"
+      "binaryDir": "cmake-build-${presetName}"
     },
     {
       "name": "RelWithDebInfo",
-      "displayName": "RelWithDebInfo",
       "description": "Release with debug info",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       },
-      "binaryDir": "cmake-build-RelWithDebInfo"
+      "binaryDir": "cmake-build-${presetName}"
+    },
+    {
+      "name": "Sanitized",
+      "description": "RelWithDebInfo build with undefined and address sanitizers enabled",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "USE_SANITIZERS": "ON"
+      },
+      "binaryDir": "cmake-build-${presetName}"
+    },
+    {
+      "name": "SanitizedDebug",
+      "description": "Debug build with undefined and address sanitizers enabled",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "USE_SANITIZERS": "ON"
+      },
+      "binaryDir": "cmake-build-${presetName}"
+    },
+    {
+      "name": "ThreadSanitized",
+      "description": "RelWithDebInfo build with thread sanitizer enabled",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "USE_THREAD_SANITIZER": "ON"
+      },
+      "binaryDir": "cmake-build-${presetName}"
     }
   ]
 }

@@ -10,11 +10,11 @@ TEST(iterator_test, categories) {
 }
 
 TEST(iterator_test, public_ctors) {
-  EXPECT_FALSE((std::constructible_from<intrusive::list<node>::iterator, node*>));
-  EXPECT_FALSE((std::constructible_from<intrusive::list<node>::const_iterator, const node*>));
+  EXPECT_FALSE((std::constructible_from<intrusive::list<node>::iterator, node*>) );
+  EXPECT_FALSE((std::constructible_from<intrusive::list<node>::const_iterator, const node*>) );
 
-  EXPECT_FALSE((std::constructible_from<intrusive::list<node>::iterator, std::nullptr_t>));
-  EXPECT_FALSE((std::constructible_from<intrusive::list<node>::const_iterator, std::nullptr_t>));
+  EXPECT_FALSE((std::constructible_from<intrusive::list<node>::iterator, std::nullptr_t>) );
+  EXPECT_FALSE((std::constructible_from<intrusive::list<node>::const_iterator, std::nullptr_t>) );
 }
 
 TEST(iterator_test, empty) {

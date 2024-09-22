@@ -1,9 +1,12 @@
 #!/bin/bash
 set -euo pipefail
-IFS=$' \t\n'
 
-mkdir -p cmake-build-$1
-rm -rf cmake-build-$1/*
-cmake "-DCMAKE_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake" --preset $1 \
-  -DENABLE_SLOW_TEST=ON -DTREAT_WARNINGS_AS_ERRORS=ON -S .
-cmake --build cmake-build-$1
+BUILD_TYPE=$1
+
+# Configure CMake
+cmake -S . -B cmake-build-"$BUILD_TYPE" \
+  --preset "$BUILD_TYPE" -G Ninja \
+  -DTREAT_WARNINGS_AS_ERRORS=ON
+
+# Build
+cmake --build cmake-build-"$BUILD_TYPE" -j

@@ -11,21 +11,21 @@ if [[ ! $(git remote get-url origin) =~ ^git@ ]]; then
   exit 1
 fi
 
-if git remote | grep --quiet upstream; then
+if git branch | grep --quiet feedback; then
   echo "init-repo.sh was already done on this repository."
   exit 1
 fi
 
-if [ -n "$(git status --untracked-files=no --porcelain)" ]; then
+if [[ -n $(git status --untracked-files=no --porcelain) ]]; then
   echo "init-repo.sh is intended to work on a freshly created repository."
-  echo "The working copy of this reposity is dirty. Please checkout or"
+  echo "The working copy of this repository is dirty. Please checkout or"
   echo "stash changes and run ./init-repo.sh again."
   exit 1
 fi
 
 source ci-extra/set-upstream.sh
-
 git remote add upstream "git@github.com:$UPSTREAM_REPO.git"
+
 git fetch upstream
 git branch feedback upstream/master
 git push -u origin feedback:feedback
