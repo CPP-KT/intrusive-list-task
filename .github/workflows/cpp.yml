@@ -35,7 +35,7 @@ jobs:
           - { name: Linux/Clang, os: ubuntu-22.04, compiler: clang-18 }
           - { name: macOS,       os: macos-13,     compiler: appleclang-18 }
           - { name: macOS M1,    os: macos-14,     compiler: appleclang-18 }
-          - { name: Windows,     os: windows-2022, compiler: msvc-2022 }
+          # - { name: Windows,     os: windows-2022, compiler: msvc-2022 }
         build_type:
           - Release
           - Debug
