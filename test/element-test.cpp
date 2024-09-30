@@ -6,7 +6,7 @@
 TEST(element_test, default_ctor) {
   struct default_constructible_node : intrusive::list_element<> {};
 
-  default_constructible_node node;
+  [[maybe_unused]] default_constructible_node node;
 }
 
 TEST(element_test, copy_ctor) {
